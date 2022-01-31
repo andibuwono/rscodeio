@@ -13,8 +13,8 @@ get_stylesheets_location <- function(){
 
   extract_rstudio_path_parts <- function(path){
     dir_parts <- fs::path_split(path)[[1]]
-    rstudio_ind <- which(dir_parts %in% c("RStudio","rstudio"))
-    if(length(rstudio_ind) != 1) return(NULL)
+    rstudio_ind <- which(grepl("RStudio|rstudio", dir_parts))
+    if(length(rstudio_ind) != 1) rstudio_ind = max(rstudio_ind)
 
     dir_parts[seq(rstudio_ind)]
   }
